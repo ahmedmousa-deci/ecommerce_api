@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-// responde with all orders
+// respond with all orders
 router.get("/", (req, res) => {
   res.json({
     status: 200,
@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
   });
 });
 
-//responde with a certain order
+//respond with a certain order
 router.get("/:id", (req, res) => {
   res.json({
     status: 200,
