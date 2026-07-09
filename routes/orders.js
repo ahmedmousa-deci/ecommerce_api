@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 
 const router = express.Router();
 
-// respond with all orders
+// respond with all Korders
 router.get("/", (req, res) => {
   res.json({
     status: 200,
@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
   });
 });
 
-//respond with a certain order
 router.get("/:id", (req, res) => {
   res.json({
     status: 200,
@@ -18,7 +17,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-//add a order
 router.post("/", (req, res) => {
   res.json({
     status: 200,
@@ -26,12 +24,18 @@ router.post("/", (req, res) => {
   });
 });
 
-// edit order
-router.put("/:id", (req, res) => {
+router.patch("/:id", (req, res) => {
   res.json({
     status: 200,
     message: "ok",
   });
 });
 
-module.exports = router;
+router.delete("/:id", (req, res) => {
+  res.json({
+    status: 200,
+    message: "ok",
+  });
+});
+
+export default router;

@@ -1,5 +1,5 @@
 class AppError extends Error {
-  constructor(message, statusCode) {
+  constructor(statusCode, message) {
     super(message);
     this.statusCode = statusCode;
     this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
@@ -9,4 +9,4 @@ class AppError extends Error {
   }
 }
 
-module.exports = AppError;
+export default AppError;

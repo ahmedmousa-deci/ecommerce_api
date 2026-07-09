@@ -1,15 +1,16 @@
-const express = require("express");
-const config = require("./config");
+import express from "express";
+import config from "./config.js";
 
-const connectDB = require("./db");
-const cartsRouter = require("./routes/carts");
-const ordersRouter = require("./routes/orders");
-const productsRouter = require("./routes/products");
-const errHandler = require("./middleware/errHandler");
+import connectDB from "./db/index.js";
+import cartsRouter from "./routes/carts.js";
+import ordersRouter from "./routes/orders.js";
+import productsRouter from "./routes/products.js";
+import categoryRouter from "./routes/category.js";
+import errHandler from "./middleware/errHandler.js";
 
 const app = express();
 
-connectDB(config.db_url);
+await connectDB(config.db_url);
 
 // server middleware
 app.use(express.json());
@@ -25,8 +26,9 @@ app.get("/", (req, res) => {
 app.use("/carts", cartsRouter);
 app.use("/orders", ordersRouter);
 app.use("/products", productsRouter);
+app.use("/category", categoryRouter);
 
-// centeral error handler
+// central error handler
 app.use(errHandler);
 
 // running the apps

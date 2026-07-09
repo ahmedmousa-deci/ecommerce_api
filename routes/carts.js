@@ -1,8 +1,7 @@
-const express = require("express");
+import express from "express";
 
 const router = express.Router();
 
-// responde with all carts
 router.get("/", (req, res) => {
   res.json({
     status: 200,
@@ -10,7 +9,6 @@ router.get("/", (req, res) => {
   });
 });
 
-//responde with a certain cart
 router.get("/:id", (req, res) => {
   res.json({
     status: 200,
@@ -18,7 +16,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-//add a cart
 router.post("/", (req, res) => {
   res.json({
     status: 200,
@@ -26,12 +23,18 @@ router.post("/", (req, res) => {
   });
 });
 
-// edit cart
-router.put("/:id", (req, res) => {
+router.patch("/:id", (req, res) => {
   res.json({
     status: 200,
     message: "ok",
   });
 });
 
-module.exports = router;
+router.delete("/:id", (req, res) => {
+  res.json({
+    status: 200,
+    message: "ok",
+  });
+});
+
+export default router;

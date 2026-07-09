@@ -1,5 +1,5 @@
-// Enviroment Variables handling
-require("dotenv").config();
+// Environment Variables handling
+import "dotenv/config";
 
 const config = {
   port: process.env.PORT || 3000,
@@ -13,4 +13,4 @@ if (!config.db_url) {
   process.exit(1);
 }
 
-module.exports = config;
+export default config;

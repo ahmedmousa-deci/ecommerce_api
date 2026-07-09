@@ -1,85 +1,65 @@
-const productsModule = require("../modules/products");
+import productsModule from "../modules/products.js";
+import aHandler from "../utils/asyncHandler.js";
+import AppError from "../utils/appError.js";
 
-async function getProducts(req, res, next) {
-  try {
-    const products = await productsModule.find({});
-    res.json({
-      status: 200,
-      message: "good for now",
-      content: products,
-    });
-  } catch (error) {
-    next(error);
-  }
-}
+export const getProducts = aHandler(async (req, res, next) => {
+  const products = await productsModule.find({}).populate("category");
+  res.json({
+    status: 200,
+    message: "All products has been fetched successfully",
+    data: products,
+  });
+});
 
-async function getProduct(req, res, next) {
-  console.log("GET /products/:id");
-  try {
-    const product = await productsModule.findById(req.params.id).orFail();
-    res.json({
-      code: 200,
-      content: product,
-    });
-  } catch (error) {
-    next(error);
-  }
-}
+export const getProduct = aHandler(async (req, res, next) => {
+  const product = await productsModule
+    .findById(req.params.id)
+    .orFail(new AppError(404, "Couldn't find a product with this id"))
+    .populate("category");
+  res.json({
+    status: 200,
+    message: "Product found",
+    data: product,
+  });
+});
 
-async function addProduct(req, res, next) {
-  console.log("POST /products");
-  console.log(req.body);
-  try {
-    await productsModule.create({
+export const addProduct = aHandler(async (req, res, next) => {
+  const product = await productsModule
+    .create({
       name: req.body.name,
       category: req.body.category,
       description: req.body.description,
       price: req.body.price,
       stock: req.body.stock,
-    });
-    res.status(201);
-    res.json({
-      code: 201,
-      message: "created successfully",
-    });
-  } catch (error) {
-    next(error);
-  }
-}
+      images: req.body.images,
+    })
+    .populate("category");
+  res.status(201);
+  res.json({
+    status: 201,
+    message: "Created successfully",
+    data: product,
+  });
+});
 
-async function updateProduct(req, res, next) {
-  console.log("patch /products");
-  try {
-    const updatedProduct = await productsModule
-      .findByIdAndUpdate(req.params.id, req.body, {
-        returnDocument: "after",
-        runValidators: true,
-      })
-      .orFail();
-    res.json({
-      code: 200,
-      message: "updated",
-      content: updatedProduct,
-    });
-  } catch (error) {
-    next(error);
-  }
-}
+export const updateProduct = aHandler(async (req, res, next) => {
+  const updatedProduct = await productsModule
+    .findByIdAndUpdate(req.params.id, req.body, {
+      returnDocument: "after",
+      runValidators: true,
+    })
+    .orFail(new AppError(404, "Couldn't find a product with this id"))
+    .populate("category");
+  res.json({
+    code: 200,
+    message: "Updated successfully",
+    data: updatedProduct,
+  });
+});
 
-async function deleteProduct(req, res, next) {
-  console.log("DELETE /products");
-  try {
-    await productsModule.findByIdAndDelete(req.params.id).orFail();
-    res.status(204).end();
-  } catch (error) {
-    next(error);
-  }
-}
-
-module.exports = {
-  getProducts,
-  getProduct,
-  addProduct,
-  updateProduct,
-  deleteProduct,
-};
+export const deleteProduct = aHandler(async (req, res, next) => {
+  await productsModule
+    .findByIdAndDelete(req.params.id)
+    .orFail(new AppError(404, "Couldn't find a product with this id"));
+  res.status(204).send();
+});

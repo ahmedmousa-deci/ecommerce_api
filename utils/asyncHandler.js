@@ -1,3 +1,7 @@
-const aH = (fn) => {
-    return fn(req, res, next).catch(next);
-}
+const aHandler = (fn) => {
+  return (req, res, next) => {
+    fn(req, res, next).catch(next);
+  };
+};
+
+export default aHandler;

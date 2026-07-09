@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
@@ -27,28 +27,32 @@ const productSchema = new mongoose.Schema(
       max: [1000, "The stock can't be higher than 1000 unit"],
     },
     category: {
-      type: String,
-      required: [true, "Category is required"],
-      enum: [
-        "laptops",
-        "phones",
-        "headphones",
-        "tablets",
-        "smartwatches",
-        "chargers",
-        "powerbanks",
-      ],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+    images: {
+      type: [String],
+      default: [],
     },
   },
   {
     toJSON: {
+      virtuals: true,
       transform: (doc, ret) => {
         ret.price = ret.price.toString(); // making the price string in the json response
 
         return ret;
       },
     },
+    toObject: true,
   },
 );
 
-module.exports = mongoose.model("Products", productSchema);
+// instead of storing the property inStock in the database and change it manually,
+// this sentence will add a virtual property (that does not being stored in the database ), and it will change dynamically with every query.
+productSchema.virtual("inStock").get(function () {
+  return this.stock > 0;
+});
+
+export default mongoose.model("Products", productSchema);

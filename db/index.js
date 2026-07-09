@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 /**
  * Connecting to the database, Requires the url to connect
@@ -15,4 +15,4 @@ async function connectDB(url) {
   }
 }
 
-module.exports = connectDB;
+export default connectDB;
