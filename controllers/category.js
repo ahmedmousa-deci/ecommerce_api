@@ -78,11 +78,3 @@ export const deleteCategory = aHandler(async (req, res, next) => {
     .orFail(new AppError(404, "Failed to find the Category using this id."));
   res.status(204).send();
 });
-
-// import express from "express";
-
-// const router = express.Router();
-
-// router.get("/" , (req,res) => {
-//   res.statusCode
-// })

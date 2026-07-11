@@ -1,40 +1,28 @@
 import express from "express";
+import {
+  getCarts,
+  getCart,
+  addCart,
+  addItems,
+  updateCart,
+  deleteCart,
+  clearCart,
+} from "../controllers/carts.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.get("/", getCarts);
 
-router.get("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.get("/:id", getCart);
 
-router.post("/", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.post("/", addCart);
 
-router.patch("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.post("/:id/items", addItems);
 
-router.delete("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.patch("/:id", updateCart);
+
+router.delete("/:id", deleteCart);
+
+router.delete("/:id/clear", clearCart);
 
 export default router;

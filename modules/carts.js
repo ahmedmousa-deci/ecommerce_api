@@ -1,13 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const cartsSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      required: [true, "The username mustn't be missing"],
-      trim: true,
-      match: [/^[a-zA-Z0-9_]{3,20}$/, "Username is Invalid"],
-    },
     items: [
       {
         productId: {
@@ -19,12 +13,18 @@ const cartsSchema = new mongoose.Schema(
           type: Number,
           required: true,
           min: [1, "Quantity cannot be less than 1"],
-          defualt: 1,
+          default: 1,
         },
       },
     ],
+    totalPrice: {
+      type: Number,
+      required: true,
+      min: [0, "Price Can't be less than zero"],
+      default: 0,
+    },
   },
   { timestamps: true },
 );
 
-module.exports = mongoose.model("Carts", cartsSchema);
+export default mongoose.model("Carts", cartsSchema);
