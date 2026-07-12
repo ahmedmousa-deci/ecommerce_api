@@ -1,4 +1,6 @@
 import express from "express";
+import { body } from "express-validator";
+import validator from "../middleware/validator.js";
 import {
   addOrder,
   deleteOrder,
@@ -13,7 +15,22 @@ router.get("/", getOrders);
 
 router.get("/:id", getOrder);
 
-router.post("/", addOrder);
+router.post(
+  "/",
+  [
+    body("cartId").trim().notEmpty().withMessage("cardId is required"),
+    body("shippingAddress")
+      .trim()
+      .notEmpty()
+      .withMessage("shipping Address is required"),
+    body("status")
+      .optional()
+      .isIn(["pending", "processing", "shipped", "delivered", "cancelled"])
+      .withMessage("Invalid status"),
+  ],
+  validator,
+  addOrder,
+);
 
 router.patch("/:id", updateOrder);
 

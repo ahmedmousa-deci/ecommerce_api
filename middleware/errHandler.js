@@ -1,10 +1,36 @@
-async function errHandler(err, req, res, next) {
-  console.log(err, err.name, err.message);
-  res.status(400);
-  res.json({
-    code: 400,
-    message: "bad request",
-  });
-}
+import config from "../config.js";
 
-export default errHandler;
+const errorHandler = (err, req, res, next) => {
+  console.error("ERROR:", err.name, err.message);
+
+  let statusCode = err.statusCode || 500;
+  let message = err.message || "Internal Server Error";
+
+  if (err.name === "ValidationError") {
+    statusCode = 400;
+    const errors = Object.values(err.errors).map((el) => el.message);
+    message = `Invalid input data: ${errors.join(". ")}`;
+  }
+
+  if (err.name === "CastError") {
+    statusCode = 400;
+    message = `Invalid ${err.path}: ${err.value}.`;
+  }
+
+  if (err.code === 11000) {
+    statusCode = 400;
+    const value = Object.values(err.keyValue)[0];
+    message = `Duplicate field value: '${value}'. Please use another value!`;
+  }
+
+  res.status(statusCode).json({
+    status: statusCode,
+    message: message,
+    data: null,
+    ...(config.node_env === "development" && { stack: err.stack }),
+  });
+    console.error(err);
+    
+};
+
+export default errorHandler;

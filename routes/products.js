@@ -1,4 +1,6 @@
 import express from "express";
+import { body } from "express-validator";
+import validator from "../middleware/validator.js";
 import {
   getProduct,
   getProducts,
@@ -9,19 +11,28 @@ import {
 
 const router = express.Router();
 
-// respond with all products
 router.get("/", getProducts);
 
-//respond with a certain product
 router.get("/:id", getProduct);
 
-//add a product
-router.post("/", addProduct);
+router.post(
+  "/",
+  [
+    body("name").trim().notEmpty().withMessage("name is Required"),
+    body("category").trim().notEmpty().withMessage("category is required"),
+    body("description")
+      .trim()
+      .notEmpty()
+      .withMessage("description is required"),
+    body("price").trim().notEmpty().withMessage("price is required"),
+    body("stock").trim().notEmpty().withMessage("stock is required"),
+  ],
+  validator,
+  addProduct,
+);
 
-// edit product
 router.patch("/:id", updateProduct);
 
-// delete product
 router.delete("/:id", deleteProduct);
 
 export default router;
