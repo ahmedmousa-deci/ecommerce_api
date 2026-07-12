@@ -1,6 +1,6 @@
 content = """# E-Commerce Backend API
 
-![https://github.com/ahmedmousa-deci/ecommerce_api](Github Repo)
+[Github Repo](https://github.com/ahmedmousa-deci/ecommerce_api)
 
 ## Overview
 
@@ -33,6 +33,90 @@ This is a RESTful API built with Node.js, Express, and MongoDB for managing an e
 
 1. **Clone the repository:**
    ```bash
-   git clone <>
-   cd <>
+   git clone https://github.com/ahmedmousa-deci/ecommerce_api
+   cd ecommerce_api
    ```
+2. **Install packages**
+   ```bash
+   npm install
+   ```
+3. **Add .env**
+
+   Create a .env file with the `DB_URL`, `PORT` and `NODE_ENV`
+
+4. **Seed the app**
+
+   run
+
+   ```bash
+   npm run seed
+   ```
+
+5. **Finally, Run the server**
+
+   For production
+
+   ```bash
+   npm run start
+   ```
+
+   For development
+
+   ```bash
+   npm run dev
+
+   ```
+
+# Routes
+
+Carts
+
+    get /carts
+
+    get /carts/:id
+
+    post /carts
+
+    post /carts/:id/items
+
+    patch /carts/:id
+
+    delete /carts/:id
+
+    delete /carts/:id/clear
+
+Categories
+
+    get /categories
+
+    get /categories/:id
+
+    post /categories
+
+    patch /categories/:id
+
+    delete /categories/:id
+
+Orders
+
+    get /orders
+
+    get /orders/:id
+
+    post /orders
+
+    patch /orders/:id
+
+    delete /orders/:id
+
+Products
+
+    get /products
+
+    get /products/:id
+
+    post /products
+
+    patch /products/:id
+
+    delete /products/:id

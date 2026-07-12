@@ -22,7 +22,7 @@ export const getOrder = aHandler(async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     throw new AppError(400, "invalid cart id");
 
-  const order = await ordersModuleModule
+  const order = await ordersModule
     .findById(req.params.id)
     .orFail(new AppError(404, "Couldn't find any order with this id"))
     .populate("items.productId");

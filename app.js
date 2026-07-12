@@ -12,6 +12,8 @@ import { sanitize } from "mongo-sanitizer"; // using mongo-sanitizer instead of 
 
 const app = express();
 
+console.log(config.node_env);
+
 await connectDB(config.db_url);
 
 // server middleware
