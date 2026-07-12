@@ -113,12 +113,14 @@ export const addItems = aHandler(async (req, res, next) => {
       message: "out of stock",
       data: null,
     });
+    return;
   } else if (inS === "los") {
     res.status(409).json({
       status: 409,
       message: "low on stock",
       data: null,
     });
+    return;
   }
 
   if (!(itemIndex > -1) && req.body.quantity > 0)
@@ -126,6 +128,28 @@ export const addItems = aHandler(async (req, res, next) => {
       productId: req.body.productId,
       quantity: req.body.quantity,
     });
+
+  cart.totalPrice = await calculateTotal([
+    {
+      id: req.body.productId,
+      quantity:
+        itemIndex > -1 && newQuantity > 0
+          ? cart.items[itemIndex].quantity
+          : req.body.quantity,
+    },
+  ]);
+  console.log(
+    cart.totalPrice,
+    await calculateTotal([
+      {
+        id: req.body.productID,
+        quantity:
+          itemIndex > -1 && newQuantity > 0
+            ? cart.items[itemIndex].quantity
+            : req.body.quantity,
+      },
+    ]),
+  );
   await cart.save();
   res.status(201).json({
     status: 201,

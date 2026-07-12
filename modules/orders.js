@@ -1,18 +1,18 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import Counter from "./counter.js"; // 1. Import the Counter model
 
-const ordersSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: [true, "The username mustn't be missing"],
-      trim: true,
-      match: [/^[a-zA-Z0-9_]{3,20}$/, "Username is Invalid"],
+const ordersSchema = new mongoose.Schema(
+  {
+    // 2. Define the orderNumber field so Mongoose allows it to be saved
+    orderNumber: {
+      type: Number,
     },
     items: [
       {
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Products",
-          required: true,
+          required: [true, "product id is required"],
         },
         quantity: {
           type: Number,
@@ -22,34 +22,37 @@ const ordersSchema = new mongoose.Schema({
         },
       },
     ],
-    deliveryAddress: {
-      street: { 
-        type: String, 
-        required: [true, "Street address is required"],
-        trim: true 
-      },
-      city: { 
-        type: String, 
-        required: [true, "City is required"],
-        trim: true 
-      },
-      state: { 
-        type: String, 
-        required: [true, "State is required"],
-        trim: true 
-      },
-      zipCode: { 
-        type: String, 
-        required: [true, "Zip code is required"],
-        trim: true 
-      }
+    totalPrice: {
+      type: Number,
+      required: true,
+      min: [0, "Price Can't be less than zero"],
+      default: 0,
     },
-    orderDate: {
-      type: Date,
-      default: Date.now,
-    }
-  }, 
-  { timestamps: true } 
+    status: {
+      type: String,
+      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
+      default: "pending",
+    },
+    shippingAddress: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true },
 );
 
-module.exports = mongoose.model("Orders", ordersSchema);
+// 3. Modern async hook: No 'next' parameter required.
+// If an error happens, Mongoose automatically catches the Promise rejection and safely aborts the save.
+ordersSchema.pre("save", async function () {
+  if (this.isNew) {
+    const counter = await Counter.findByIdAndUpdate(
+      { _id: "orderNumber" },
+      { $inc: { seq: 1 } },
+      { returnDocument: "after", upsert: true },
+    );
+
+    this.orderNumber = counter.seq;
+  }
+});
+
+export default mongoose.model("Orders", ordersSchema);

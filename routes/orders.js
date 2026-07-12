@@ -1,41 +1,22 @@
 import express from "express";
+import {
+  addOrder,
+  deleteOrder,
+  getOrder,
+  getOrders,
+  updateOrder,
+} from "../controllers/orders.js";
 
 const router = express.Router();
 
-// respond with all Korders
-router.get("/", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.get("/", getOrders);
 
-router.get("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.get("/:id", getOrder);
 
-router.post("/", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.post("/", addOrder);
 
-router.patch("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.patch("/:id", updateOrder);
 
-router.delete("/:id", (req, res) => {
-  res.json({
-    status: 200,
-    message: "ok",
-  });
-});
+router.delete("/:id", deleteOrder);
 
 export default router;
