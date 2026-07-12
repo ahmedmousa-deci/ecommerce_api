@@ -1,4 +1,4 @@
-content = """# E-Commerce Backend API
+# E-Commerce Backend API
 
 [Github Repo](https://github.com/ahmedmousa-deci/ecommerce_api)
 
