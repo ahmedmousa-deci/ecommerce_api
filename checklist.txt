@@ -1,0 +1,6 @@
+## API Description Checklist
+Please ensure the following criteria are met before requesting a review:
+
+- [x] **Documentation:** Updated the API documentation (e.g., Swagger/Postman) with the new endpoint and parameters.
+- [x] **Error Handling:** Tested invalid payloads; the API correctly returns a `400 Bad Request` status.
+- [x] **Environment Variables:** Updated the `README.md` with any new variables that need to be added to the `.env` file.
