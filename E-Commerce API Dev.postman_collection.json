@@ -1,13 +1,13 @@
 {
   "info": {
-    "_postman_id": "2466c635-093c-4caf-bd4c-50b483458ed5",
-    "name": "api",
+    "_postman_id": "2567c151-9342-4fbd-b8bd-f6e5718ce10c",
+    "name": "E-Commerce API Dev",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "20344692"
   },
   "item": [
     {
-      "name": "category",
+      "name": "categories",
       "item": [
         {
           "name": "fetch all categories",
@@ -18,14 +18,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/category/",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
+                "api",
+                "categories",
                 ""
               ]
             }
@@ -41,15 +40,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/category/6a4f396712359c542a358612",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/{{cateogryId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
-                "6a4f396712359c542a358612"
+                "api",
+                "categories",
+                "{{cateogryId}}"
               ]
             }
           },
@@ -64,15 +62,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/category/laptops",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/{{categorySlug}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
-                "laptops"
+                "api",
+                "categories",
+                "{{categorySlug}}"
               ]
             }
           },
@@ -96,14 +93,13 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/category/",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
+                "api",
+                "categories",
                 ""
               ]
             }
@@ -128,15 +124,14 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/category/6a4fc8d0c91e5ea8112594af",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/{{cateogryId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
-                "6a4fc8d0c91e5ea8112594af"
+                "api",
+                "categories",
+                "{{cateogryId}}"
               ]
             }
           },
@@ -151,15 +146,14 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/category/6a4fc8d0c91e5ea8112594af",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/categories/{{cateogryId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "category",
-                "6a4fc8d0c91e5ea8112594af"
+                "api",
+                "categories",
+                "{{cateogryId}}"
               ]
             }
           },
@@ -179,14 +173,48 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/products",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/products/",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
-                "products"
+                "api",
+                "products",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all products with filter",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/products/?name=lab&category=electronics",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "lab",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "electronics",
+                  "type": "text"
+                }
               ]
             }
           },
@@ -201,15 +229,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/products/6a4fd050089f15aaf5205f18",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/products/{{productId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "products",
-                "6a4fd050089f15aaf5205f18"
+                "{{productId}}"
               ]
             }
           },
@@ -225,7 +252,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"test\",\n  \"price\": 1999,\n  \"description\": \"this is description\",\n  \"stock\": 1000,\n  \"category\": \"6a4f396712359c542a358612\"\n}",
+              "raw": "{\n  \"name\": \"test\",\n  \"price\": 1999,\n  \"description\": \"this is description\",\n  \"stock\": 1000,\n  \"category\": \"6a6126739402f300a9683810\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -233,13 +260,12 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/products",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/products",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "products"
               ]
             }
@@ -256,7 +282,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"test2nd2\",\n  \"category\": \"6a4f396712359c542a358612\"\n}",
+              "raw": "{\n  \"name\": \"test2nd2\"\n//   \"category\": \"6a4f396712359c542a358612\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -264,15 +290,14 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/products/6a4fd050089f15aaf5205f18",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/products/{{productId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "products",
-                "6a4fd050089f15aaf5205f18"
+                "{{productId}}"
               ]
             }
           },
@@ -287,15 +312,14 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/products/6a4fd050089f15aaf5205f18",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/products/{{productId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "products",
-                "6a4fd050089f15aaf5205f18"
+                "{{productId}}"
               ]
             }
           },
@@ -315,13 +339,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/carts",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts"
               ]
             }
@@ -337,15 +360,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/carts/6a53e96b899e94f55c3c97ec",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts/{{cartId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts",
-                "6a53e96b899e94f55c3c97ec"
+                "{{cartId}}"
               ]
             }
           },
@@ -361,7 +383,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"6a53e96b899e94f55c3c97e6\",\n      \"quantity\": 20\n    },\n    {\n      \"productId\": \"6a53e96b899e94f55c3c97e7\",\n      \"quantity\": 5\n    }\n  ]\n}",
+              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"6a6126739402f300a9683813\",\n      \"quantity\": 2\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -369,13 +391,12 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/carts",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts"
               ]
             }
@@ -392,7 +413,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"productId\": \"6a53e96b899e94f55c3c97e7\",\n  \"quantity\": 5\n}  ",
+              "raw": "{\n  \"productId\": \"6a6126739402f300a9683813\",\n  \"quantity\": 5\n}  ",
               "options": {
                 "raw": {
                   "language": "json"
@@ -400,16 +421,15 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/carts/6a540414800e20c5232a6018/items",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts/items/{{cartId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts",
-                "6a540414800e20c5232a6018",
-                "items"
+                "items",
+                "{{cartId}}"
               ]
             }
           },
@@ -425,7 +445,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"6a53e96b899e94f55c3c97e6\",\n      \"quantity\": 15\n    },\n    {\n      \"productId\": \"6a53e96b899e94f55c3c97e7\",\n      \"quantity\": 10\n    }\n  ]\n}",
+              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"6a6126739402f300a9683813\",\n      \"quantity\": 15\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -433,15 +453,14 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/carts/6a540414800e20c5232a6018",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts/{{cartId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts",
-                "6a540414800e20c5232a6018"
+                "{{cartId}}"
               ]
             }
           },
@@ -456,15 +475,14 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/carts/6a540603060b2cf07659f54b",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/carts/{{cartId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "carts",
-                "6a540603060b2cf07659f54b"
+                "{{cartId}}"
               ]
             }
           },
@@ -473,7 +491,7 @@
       ]
     },
     {
-      "name": "ordrs",
+      "name": "orders",
       "item": [
         {
           "name": "get orders",
@@ -484,13 +502,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/orders",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/orders",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "orders"
               ]
             }
@@ -506,15 +523,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/orders/6a53e96c899e94f55c3c97f2",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/orders/{{orderId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "orders",
-                "6a53e96c899e94f55c3c97f2"
+                "{{orderId}}"
               ]
             }
           },
@@ -538,13 +554,12 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/orders",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/orders",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "orders"
               ]
             }
@@ -569,15 +584,14 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/orders/6a540c2e197478b5011d4046",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/orders/{{orderId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "orders",
-                "6a540c2e197478b5011d4046"
+                "{{orderId}}"
               ]
             }
           },
@@ -592,21 +606,44 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:3000/orders/6a540de3197478b5011d405a",
-              "protocol": "http",
+              "raw": "{{baseURL}}/api/orders/{{orderId}}",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "3000",
               "path": [
+                "api",
                 "orders",
-                "6a540de3197478b5011d405a"
+                "{{orderId}}"
               ]
             }
           },
           "response": []
         }
       ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
     }
   ]
 }

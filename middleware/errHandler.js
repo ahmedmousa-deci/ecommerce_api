@@ -1,4 +1,4 @@
-import config from "../config.js";
+import config from "../config/config.js";
 
 const errorHandler = (err, req, res, next) => {
   console.error("ERROR:", err.name, err.message);

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "./config.js";
+import config from "./config/config.js";
 
 import Category from "./modules/category.js";
 import Products from "./modules/products.js";
@@ -10,15 +10,16 @@ import Counter from "./modules/counter.js";
 const MONGO_URI = config.db_url;
 
 const seedDatabase = async () => {
+  let exitCode = 0;
   try {
     await mongoose.connect(MONGO_URI);
     console.log("Connected to MongoDB successfully.");
 
-    await Category.deleteMany({});
-    await Products.deleteMany({});
-    await Carts.deleteMany({});
     await Orders.deleteMany({});
     await Counter.deleteMany({});
+    await Products.deleteMany({});
+    await Category.deleteMany({});
+    await Carts.deleteMany({});
     console.log("Cleared existing database collections.");
 
     const categoriesData = [
@@ -134,10 +135,15 @@ const seedDatabase = async () => {
     console.log(`Successfully created ${createdOrders.length} orders.`);
 
     console.log("\nDatabase seeding completed successfully!");
-    process.exit(0);
+    console.log("successfully seeded the database with initial data.");
+    console.log("created 3 categories, 6 products, 2 carts, and 2 orders.");
+    console.log("You can now run the application using 'node app.js' or 'npm start'.");
   } catch (error) {
     console.error("Error seeding the database:", error);
-    process.exit(1);
+  } finally {
+    await mongoose.disconnect();
+    console.log("Disconnected from MongoDB.");
+    process.exit(exitCode);
   }
 };
 

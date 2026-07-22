@@ -26,7 +26,7 @@ router.post(
 );
 
 router.post(
-  "/:id/items",
+  "/items/:id",
   [
     // 2. Changed isEmpty() to notEmpty(), and moved withMessage() to the end
     body("productId").notEmpty().withMessage("required product id"),

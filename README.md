@@ -1,4 +1,4 @@
-content = """# E-Commerce Backend API
+# E-Commerce Backend API
 
 [Github Repo](https://github.com/ahmedmousa-deci/ecommerce_api)
 
@@ -42,7 +42,7 @@ This is a RESTful API built with Node.js, Express, and MongoDB for managing an e
    ```
 3. **Add .env**
 
-   Create a .env file with the `DB_URL`, `PORT` and `NODE_ENV`
+   Create a .env file with the `MONGO_URL`, `PORT` and `NODE_ENV`
 
 4. **Seed the app**
 
@@ -64,59 +64,89 @@ This is a RESTful API built with Node.js, Express, and MongoDB for managing an e
 
    ```bash
    npm run dev
-
    ```
+# Project Dependencies
+
+## Dependencies (Production)
+
+| Package | Version |
+| :--- | :--- |
+| `decimal.js` | `^10.6.0` |
+| `dotenv` | `^17.4.2` |
+| `express` | `^5.2.1` |
+| `express-mongo-sanitize` | `^2.2.0` |
+| `express-validator` | `^7.3.2` |
+| `mongoose` | `^9.7.3` |
+
+## DevDependencies (Development)
+
+| Package | Version |
+| :--- | :--- |
+| `cross-env` | `^10.1.0` |
+| `nodemon` | `^3.1.14` |
+
+## Installation Commands
+
+**Production dependencies:**
+```bash
+npm install decimal.js dotenv express express-mongo-sanitize express-validator mongoose
+```
+
+**Development dependencies:**
+```bash
+npm install -D cross-env nodemon
+```
 
 # Routes
 
 Carts
 
-    get /carts
+    get /api/carts
 
-    get /carts/:id
+    get /api/carts/:id
 
-    post /carts
+    post /api/carts
 
-    post /carts/:id/items
+    post /api/carts/:id/items
 
-    patch /carts/:id
+    patch /api/carts/:id
 
-    delete /carts/:id
+    delete /api/carts/:id
 
-    delete /carts/:id/clear
+    delete /api/carts/:id/clear
 
 Categories
 
-    get /categories
+    get /api/categories
 
-    get /categories/:id
+    get /api/categories/:id
 
-    post /categories
+    post /api/categories
 
-    patch /categories/:id
+    patch /api/categories/:id
 
-    delete /categories/:id
+    delete /api/categories/:id
 
 Orders
 
-    get /orders
+    get /api/orders
 
-    get /orders/:id
+    get /api/orders/:id
 
-    post /orders
+    post /api/orders
 
-    patch /orders/:id
+    patch /api/orders/:id
 
-    delete /orders/:id
+    delete /api/orders/:id
 
 Products
 
-    get /products
+    get /api/products
 
-    get /products/:id
+    get /api/products/:id
 
-    post /products
+    post /api/products
 
-    patch /products/:id
+    patch /api/products/:id
 
-    delete /products/:id
+    delete /api/products/:id

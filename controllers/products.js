@@ -2,9 +2,10 @@ import productsModule from "../modules/products.js";
 import categoryModule from "../modules/category.js";
 import aHandler from "../utils/asyncHandler.js";
 import AppError from "../utils/appError.js";
+import mongoose from "mongoose";
 
 export const getProducts = aHandler(async (req, res, next) => {
-  const { name, minPrice, maxPrice, inStock } = req.query;
+  const { name, minPrice, maxPrice, inStock, category } = req.query;
   let query = {};
 
   if (name) query.name = { $regex: name, $options: "i" };
@@ -15,6 +16,23 @@ export const getProducts = aHandler(async (req, res, next) => {
 
   if (inStock === "true") query.inStock = true;
   if (inStock === "false") query.inStock = false;
+
+  if (category) {
+    const isValidCategoryId = await mongoose.Types.ObjectId.isValid(category);
+    if (!isValidCategoryId) {
+      const categoryDoc = await categoryModule.findOne({ slug: category });
+      if (categoryDoc) {
+        query.category = categoryDoc._id;
+      }
+      else {
+        throw new AppError(404, "Couldn't find a category with this slug");
+      }
+    } else if (isValidCategoryId && (await categoryModule.exists({ _id: category }))) {
+      query.category = category;
+    } else {
+      throw new AppError(404, "Couldn't find a category with this id");
+    }
+  };
 
   const products = await productsModule.find(query).populate("category");
 
